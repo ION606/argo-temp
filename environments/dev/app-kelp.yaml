@@ -1,0 +1,17 @@
+# THE  C H I L D
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: app-kelp
+    namespace: argocd
+spec:
+    project: default
+    source:
+        repoURL: https://github.com/ION606/argo-temp.git
+        targetRevision: blahaj-app
+        path: apps/kelp
+    destination:
+        server: https://kubernetes.default.svc
+        namespace: demo
+    syncPolicy:
+        automated: { prune: true, selfHeal: true }

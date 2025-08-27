@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: kelp
+    namespace: demo
+spec:
+    replicas: 2
+    selector: { matchLabels: { app: kelp } }
+    template:
+        metadata:
+            labels: { app: kelp }
+        spec:
+            containers:
+                - name: app
+                  image: blahaj-bun:dev
+                  imagePullPolicy: IfNotPresent
+                  ports: [{ containerPort: 8080, name: http }]
+                  env:
+                      - { name: SERVICE_NAME, value: "kelp" }
+                      - { name: SERVICE_EMOJI, value: "🌿" }
+                      - { name: FRIEND_NAME, value: "blahaj" }
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: kelp
+    namespace: demo
+spec:
+    selector: { app: kelp }
+    ports: [{ name: http, port: 80, targetPort: 8080 }]

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: reef
-    namespace: demo
+    namespace: argocd
 spec:
     replicas: 1
     selector: { matchLabels: { app: reef } }
@@ -20,7 +20,7 @@ apiVersion: v1
 kind: Service
 metadata:
     name: reef
-    namespace: demo
+    namespace: argocd
 spec:
     selector: { app: reef }
     ports: [{ name: http, port: 80, targetPort: 8080 }]

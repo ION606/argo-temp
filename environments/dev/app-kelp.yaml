@@ -12,6 +12,6 @@ spec:
         path: apps/kelp
     destination:
         server: https://kubernetes.default.svc
-        namespace: demo
+        namespace: argocd
     syncPolicy:
         automated: { prune: true, selfHeal: true }
